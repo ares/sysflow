@@ -12,10 +12,10 @@ module Actions
             on(nil) do
               init_run
               suspend do |suspended_action|
-                SystemConnector.instance.run_cmd(cmd, suspended_action)
+                SshConnector.instance.run_cmd(cmd, suspended_action)
               end
             end,
-            on(~SystemConnector::ProcessUpdate) do |process_update|
+            on(~SshConnector::ProcessUpdate) do |process_update|
               self.pid   = process_update[:pid]
               self.lines = process_update[:lines] unless process_update[:lines].empty?
 
